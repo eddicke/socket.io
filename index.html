@@ -2,6 +2,11 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
+      <script src="http://www.babylonjs.com/hand.minified-1.2.js"></script>
+        <script src="http://www.babylonjs.com/cannon.js"></script>
+        <script src="http://www.babylonjs.com/oimo.js"></script>
+        <script src="https://www.babylonjs.com/babylon.js"></script>
+
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -12,6 +17,12 @@
       #messages li { padding: 5px 10px; }
       #messages li:nth-child(odd) { background: #eee; }
       #messages { margin-bottom: 40px }
+      #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+
     </style>
   </head>
   <body>
@@ -21,8 +32,25 @@
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+      //bjs
+      <div id="canvasZone">
+        <canvas id="renderCanvas"></canvas>
+    </div>
     <script>
-      $(function () {
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+
+        var scene = new BABYLON.Scene(engine);
+        
+            if (BABYLON.Engine.isSupported()) {
+                var canvas = document.getElementById("renderCanvas");
+                var engine = new BABYLON.Engine(canvas, true);
+        
+                BABYLON.SceneLoader.Load("https://raw.githubusercontent.com/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {
+                    // Wait for textures and shaders to be ready
+                    scene.executeWhenReady(function () {
+             //socket.io
+                      $(function () {
         var socket = io();
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
@@ -34,6 +62,45 @@
           window.scrollTo(0, document.body.scrollHeight);
         });
       });
-    </script>
+
+                    scene.activeCamera.attachControl(canvas);
+        
+                        // Once the scene is loaded, just register a render loop to render it
+        var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
+        
+            // Move the sphere upward 1/2 its height
+            sphere.position.y = 1;
+        
+        scene.onPointerDown = function (evt, pickResult) {
+        console.log(pickResult);
+        						if(pickResult.hit){
+               //  if the click hits the ground object, we change the impact position
+                if (pickResult.pickedMesh.name = "sphere1") {
+                  sphere.dispose()
+                }
+                }
+            };
+        
+                        engine.runRenderLoop(function() {
+        sphere.position.z -= 0.002;
+                            scene.render();
+                        });
+                    });
+                }, function (progress) {
+                    // To do: give progress feedback to user
+                });
+        
+            }
+
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    
+     </script>
   </body>
 </html>
