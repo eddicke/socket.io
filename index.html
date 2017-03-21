@@ -46,7 +46,7 @@
                 var canvas = document.getElementById("renderCanvas");
                 var engine = new BABYLON.Engine(canvas, true);
         
-                BABYLON.SceneLoader.Load("https://raw.githubusercontent.com/BabylonJS/Babylon.js/master/Playground/scenes/", "skull.babylon", engine, function (scene) {
+                BABYLON.SceneLoader.Load("https://raw.githubusercontent.com/eddicke/socket.io/master/", "skull.babylon", engine, function (scene) {
                     // Wait for textures and shaders to be ready
                     scene.executeWhenReady(function () {
              //socket.io
