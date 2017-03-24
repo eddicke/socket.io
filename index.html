@@ -39,7 +39,7 @@
     <script>
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
-
+engine.enableOfflineSupport = false;
         var scene = new BABYLON.Scene(engine);
         
             if (BABYLON.Engine.isSupported()) {
@@ -95,11 +95,7 @@
             scene.render();
         });
 
-        // Resize
-        window.addEventListener("resize", function () {
-            engine.resize();
-        });
-    
+        
      </script>
   </body>
 </html>
