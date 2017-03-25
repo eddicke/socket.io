@@ -46,7 +46,7 @@ engine.enableOfflineSupport = false;
                 var canvas = document.getElementById("renderCanvas");
                 var engine = new BABYLON.Engine(canvas, true);
         
-                BABYLON.SceneLoader.Load("https://rawcdn.githack.com/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
+                BABYLON.SceneLoader.Load("https://raw.githubusercontent.com/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
                     scene.executeWhenReady(function () {
              //socket.io
                       $(function () {
