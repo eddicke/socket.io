@@ -45,7 +45,11 @@ engine.enableOfflineSupport = false;
         
                 BABYLON.SceneLoader.Load("https://gitcdn.xyz/repo/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
                     scene.executeWhenReady(function () {
-             //socket.io
+       var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
+   
+            // Move the sphere upward 1/2 its height
+            sphere.position.y = 1;
+                      //socket.io
                       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -55,6 +59,8 @@ engine.enableOfflineSupport = false;
         });
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
+               document.cookie = "ok';
+          alert(document.cookie);
           window.scrollTo(0, document.body.scrollHeight);
         });
       });
