@@ -2,10 +2,7 @@
 <html>
   <head>
     <title>Socket.IO chat</title>
-      <script src="http://www.babylonjs.com/hand.minified-1.2.js"></script>
-        <script src="http://www.babylonjs.com/cannon.js"></script>
-        <script src="http://www.babylonjs.com/oimo.js"></script>
-        <script src="https://www.babylonjs.com/babylon.js"></script>
+         <script src="https://www.babylonjs.com/babylon.js"></script>
 
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,7 +43,7 @@ engine.enableOfflineSupport = false;
                 var canvas = document.getElementById("renderCanvas");
                 var engine = new BABYLON.Engine(canvas, true);
         
-                BABYLON.SceneLoader.Load("https://raw.githubusercontent.com/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
+                BABYLON.SceneLoader.Load("https://gitcdn.xyz/repo/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
                     scene.executeWhenReady(function () {
              //socket.io
                       $(function () {
