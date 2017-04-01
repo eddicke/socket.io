@@ -34,22 +34,7 @@
         <canvas id="renderCanvas"></canvas>
     </div>
     <script>
-        var canvas = document.getElementById("renderCanvas");
-        var engine = new BABYLON.Engine(canvas, true);
-engine.enableOfflineSupport = false;
-        var scene = new BABYLON.Scene(engine);
-        
-            if (BABYLON.Engine.isSupported()) {
-                var canvas = document.getElementById("renderCanvas");
-                var engine = new BABYLON.Engine(canvas, true);
-        
-                BABYLON.SceneLoader.Load("https://gitcdn.xyz/repo/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
-                    scene.executeWhenReady(function () {
-       var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
-   
-            // Move the sphere upward 1/2 its height
-            sphere.position.y = 1;
-                      //socket.io
+                //socket.io
                       $(function () {
         var socket = io();
         $('form').submit(function(){
@@ -65,6 +50,23 @@ engine.enableOfflineSupport = false;
         });
       });
 
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+engine.enableOfflineSupport = false;
+      
+        var scene = new BABYLON.Scene(engine);
+        
+            if (BABYLON.Engine.isSupported()) {
+                var canvas = document.getElementById("renderCanvas");
+                var engine = new BABYLON.Engine(canvas, true);
+        
+                BABYLON.SceneLoader.Load("https://gitcdn.xyz/repo/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
+                    scene.executeWhenReady(function () {
+       var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
+   
+            // Move the sphere upward 1/2 its height
+            sphere.position.y = 1;
+            
                     scene.activeCamera.attachControl(canvas);
         
                         // Once the scene is loaded, just register a render loop to render it
