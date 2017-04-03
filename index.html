@@ -44,7 +44,7 @@
         });
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
-               document.cookie = 'ok';
+               //document.cookie = 'ok';
           alert(document.cookie);
           window.scrollTo(0, document.body.scrollHeight);
         });
