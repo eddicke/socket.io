@@ -37,29 +37,7 @@
         <canvas id="renderCanvas"></canvas>
     </div>
     <script>
-               //socket.io
-      var online = 0;
-                      $(function () {
-        var socket = io();
-                        socket.on('connect', function() {
-  socket.emit('state', 'online buddy');
-          // console.log('online');
-                          
-          socket.on('state', function(stats){
-            online++;
-             console.log(stats);
-                      if(online === 3){
-                          alert('oh yeah')
-                          }
-             
-             //document.getElementById("myBtn").innerHTML = 'nice bruh';
-            
-             document.getElementById('show').innerHTML = online;
-          })
-         
-});
-                        //tracking online user
-     
+               
      var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
@@ -209,7 +187,29 @@
         
             sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.9 }, scene);
             ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene);
-        
+        //socket.io
+      var online = 0;
+                      $(function () {
+        var socket = io();
+                        socket.on('connect', function() {
+  socket.emit('state', 'online buddy');
+          // console.log('online');
+                          
+          socket.on('state', function(stats){
+            online++;
+             console.log(stats);
+                      if(online === 3){
+                          alert('oh yeah')
+                          }
+             
+             //document.getElementById("myBtn").innerHTML = 'nice bruh';
+            
+             document.getElementById('show').innerHTML = online;
+          })
+         
+});
+                        //tracking online user
+     
             scene.onPointerDown = function(evt, pickResult){
                 // tilt-o-pad
               var pickResult = scene.pick(scene.pointerX, scene.pointerY);
