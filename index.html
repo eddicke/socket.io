@@ -25,6 +25,7 @@
     </style>
   </head>
   <body>
+    <p id = "show"></p>
     <ul id="messages"></ul>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
@@ -37,13 +38,30 @@
     </div>
     <script>
                 //socket.io
+      var online = 0;
                       $(function () {
         var socket = io();
+                        socket.on('connect', function() {
+  socket.emit('chat message', 'online buddy');
+          // console.log('online');
+                          online++;
+          socket.on('chat message', function(msg){
+             console.log(msg);
+             //document.getElementById("myBtn").innerHTML = 'nice bruh';
+            
+             document.getElementById('show').innerHTML = online;
+          })
+         
+});
+                        //tracking online user
         $('form').submit(function(){
           socket.emit('chat message', $('#m').val());
           $('#m').val('');
           return false;
         });
+                        if(online === 3){
+                          alert('oh yeah')
+                          }
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
                //document.cookie = 'ok';
