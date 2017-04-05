@@ -37,7 +37,7 @@
         <canvas id="renderCanvas"></canvas>
     </div>
     <script>
-    
+     
      var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
@@ -217,8 +217,49 @@
                 }
             })
             //*88**
+                             //socket.io
+      var online = 0;
+                      $(function () {
+        var socket = io();
+                        socket.on('connect', function() {
+  socket.emit('state', 'online buddy');
+          // console.log('online');
+                          
+          socket.on('state', function(stats){
+            online++;
+             console.log(stats);
+                      if(online === 3){
+                          alert('oh yeah')
+                          }
+             
+             //document.getElementById("myBtn").innerHTML = 'nice bruh';
+            
+             document.getElementById('show').innerHTML = online;
+          })
+         
+});
+                        //tracking online user
+        $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+              //           socket.on('state', function(stats){
+                     
+                //           })
+        socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+               //document.cookie = 'ok';
+          alert(document.cookie);
+          window.scrollTo(0, document.body.scrollHeight);
+  //=================
         var life = 5
             scene.registerBeforeRender(function(){
+              //broadcast-
+                 if(life === 3){
+           socket.emit('hunts', life);
+          }
+              ///////
                 if(life === 3){
                     //alert('try again!!')
                     bar1.innerHTML = "Click To Try Again!!"
@@ -241,46 +282,12 @@
                     ground.rotationQuaternion = new BABYLON.Quaternion();
                 }
             });
-                    //socket.io
-      var online = 0;
-                      $(function () {
-        var socket = io();
-                        socket.on('connect', function() {
-  socket.emit('state', 'online buddy');
-          // console.log('online');
-                          
-          socket.on('state', function(stats){
-            online++;
-             console.log(stats);
-                      if(online === 3){
-                          alert('oh yeah')
-                          }
-                if(life === 3){
-           socket.emit('hunts', life);
-          }
-             //document.getElementById("myBtn").innerHTML = 'nice bruh';
-            
-             document.getElementById('show').innerHTML = online;
-          })
-         
-});
-                        //tracking online user
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-              //           socket.on('state', function(stats){
-                        socket.on('hunts', function(msg){
+          ////Socket-events
+     socket.on('hunts', function(msg){
                           alert(msg)
                           })
-                //           })
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-               //document.cookie = 'ok';
-          alert(document.cookie);
-          window.scrollTo(0, document.body.scrollHeight);
-        });
+          ////sockettttt
+                });
       });
             return scene;
         
