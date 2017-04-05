@@ -37,6 +37,28 @@
         <canvas id="renderCanvas"></canvas>
     </div>
     <script>
+               //socket.io
+      var online = 0;
+                      $(function () {
+        var socket = io();
+                        socket.on('connect', function() {
+  socket.emit('state', 'online buddy');
+          // console.log('online');
+                          
+          socket.on('state', function(stats){
+            online++;
+             console.log(stats);
+                      if(online === 3){
+                          alert('oh yeah')
+                          }
+             
+             //document.getElementById("myBtn").innerHTML = 'nice bruh';
+            
+             document.getElementById('show').innerHTML = online;
+          })
+         
+});
+                        //tracking online user
      
      var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
@@ -190,6 +212,7 @@
         
             scene.onPointerDown = function(evt, pickResult){
                 // tilt-o-pad
+              var pickResult = scene.pick(scene.pointerX, scene.pointerY);
                 if(pickResult.hit){
                     if(pickResult.pickedPoint.z > sphere.position.z){
                         ground.rotation.x -= 0.02
@@ -204,6 +227,8 @@
                         ground.rotation.z -= 0.02
                     }
                 }
+              socket.emit('power', pickResult.pickedPoint.z)
+              socket.emit('power2', pickResult.pickedPoint.x)
             }
             //stop fire
             setInterval(function(){
@@ -217,29 +242,7 @@
                 }
             })
             //*88**
-                             //socket.io
-      var online = 0;
-                      $(function () {
-        var socket = io();
-                        socket.on('connect', function() {
-  socket.emit('state', 'online buddy');
-          // console.log('online');
-                          
-          socket.on('state', function(stats){
-            online++;
-             console.log(stats);
-                      if(online === 3){
-                          alert('oh yeah')
-                          }
-             
-             //document.getElementById("myBtn").innerHTML = 'nice bruh';
-            
-             document.getElementById('show').innerHTML = online;
-          })
-         
-});
-                        //tracking online user
-        
+                      
   //=================
         var life = 5
             scene.registerBeforeRender(function(){
@@ -273,6 +276,22 @@
           ////Socket-events
      socket.on('hunts', function(msg){
                           alert(msg)
+                          })
+          socket.on('power', function(hunts){
+                           if(hunts > sphere.position.z){
+                        ground.rotation.x -= 0.02
+                    }
+                    if(hunts < sphere.position.z){
+                        ground.rotation.x += 0.02
+                    }
+                          })
+          socket.on('power2', function(power){
+                           if(power > sphere.position.){
+                        ground.rotation.z -= 0.02
+                    }
+                    if(power < sphere.position.){
+                        ground.rotation.z += 0.02
+                    }
                           })
           ////sockettttt
                         $('form').submit(function(){
