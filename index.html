@@ -45,9 +45,9 @@
   socket.emit('state', 'online buddy');
           // console.log('online');
                           
-          socket.on('chat message', function(msg){
+          socket.on('state', function(stats){
             online++;
-             console.log(msg);
+             console.log(stats);
              //document.getElementById("myBtn").innerHTML = 'nice bruh';
             
              document.getElementById('show').innerHTML = online;
