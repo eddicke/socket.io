@@ -42,10 +42,11 @@
                       $(function () {
         var socket = io();
                         socket.on('connect', function() {
-  socket.emit('chat message', 'online buddy');
+  socket.emit('state', 'online buddy');
           // console.log('online');
-                          online++;
+                          
           socket.on('chat message', function(msg){
+            online++;
              console.log(msg);
              //document.getElementById("myBtn").innerHTML = 'nice bruh';
             
