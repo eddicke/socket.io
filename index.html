@@ -3,7 +3,9 @@
   <head>
     <title>Socket.IO chat</title>
          <script src="https://gitcdn.xyz/repo/eddicke/new/master/Babylon.js"></script>
-
+<script src = "https://gitcdn.xyz/repo/BabylonJS/Website/master/Oimo.js"></script>
+<script src ="https://gitcdn.xyz/repo/BabylonJS/Website/master/cannon.js"></script>
+    <script src = "https://gitcdn.xyz/repo/BabylonJS/Babylon.js/master/dist/preview%20release/materialsLibrary/babylon.gridMaterial.js"></script>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -49,37 +51,209 @@
           window.scrollTo(0, document.body.scrollHeight);
         });
       });
-      var canvas = document.getElementById("renderCanvas");
+     var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
         var createScene = function () {
         
-            // This creates a basic Babylon Scene object (non-mesh)
             var scene = new BABYLON.Scene(engine);
-        
-            // This creates and positions a free camera (non-mesh)
-            var camera = new BABYLON.FreeCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
-        
-            // This targets the camera to scene origin
+            scene.clearColor = true;
+            var camera = new BABYLON.UniversalCamera("camera1", new BABYLON.Vector3(0, 5, -10), scene);
             camera.setTarget(BABYLON.Vector3.Zero());
+            camera.detachControl(canvas, true);
         
-            // This attaches the camera to the canvas
-            camera.attachControl(canvas, true);
-        
-            // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
             var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
-        
-            // Default intensity is 1. Let's dim the light a small amount
             light.intensity = 0.7;
         
-            // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
-            var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 2, scene);
+            var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.5, scene);
         
-            // Move the sphere upward 1/2 its height
-            sphere.position.y = 1;
+            // sphere initial altitude
+            sphere.position.y = 5;
+            // var chk = sphere.position.clone();
+            //UI
+            var ss = document.createElement("link");
+        ss.type = "text/css";
+        ss.rel = "stylesheet";
+        ss.href = "//fonts.googleapis.com/css?family=Butcherman";
+        document.body.appendChild(ss);
+            var bar1 = document.createElement("div");
+        		bar1.setAttribute("id", "bar1");
+        		bar1.textContent = "Life: 5";
+        		document.body.appendChild(bar1);
+               // bar1.style.backgroundColor = "#4CAF50";
+        	    bar1.style.position = "absolute";
+             	bar1.style.bottom = "100px";
+        		bar1.style.right = "40px";
+        		bar1.style.width = '300px';
+        		bar1.style.height = "70px";
+                bar1.style.fontFamily = "Butcherman"
+                bar1.style.border = "5px solid red";
+                bar1.style.fontSize = "40px"
+                bar1.style.color = "red";
+                bar1.style.textAlign = 'center'
+                bar1.style.verticalAlign = 'middle'
+                bar1.style.padding = '50px'
+        //ball material
+            var materialSphere = new BABYLON.StandardMaterial("texture2", scene);
+            materialSphere.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
+            materialSphere.diffuseTexture = new BABYLON.Texture("textures/misc.jpg", scene);
+            sphere.material = materialSphere;
+            //ground material 
+            var knotMaterial = new BABYLON.GridMaterial("knotMaterial", scene);
+        	knotMaterial.majorUnitFrequency = 8;
+        	knotMaterial.minorUnitVisibility = 0.45;
+        	knotMaterial.gridRatio = 0.3;
+        	knotMaterial.mainColor = new BABYLON.Color3(0, 0, 0);
+        	knotMaterial.lineColor = new BABYLON.Color3(0.0, 1.0, 0.0);
+        	
+        //Smoke
+        	var smokeSystem = new BABYLON.ParticleSystem("particles", 1000, scene);
+        	smokeSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+        	smokeSystem.emitter = sphere; // the starting object, the emitter
+            smokeSystem.minEmitBox = new BABYLON.Vector3(-0.5, 1, -0.5); // Starting all from
+            smokeSystem.maxEmitBox = new BABYLON.Vector3(0.5, 1, 0.5); // To...
+        	
+        	smokeSystem.color1 = new BABYLON.Color4(0.1, 0.1, 0.1, 1.0);
+            smokeSystem.color2 = new BABYLON.Color4(0.1, 0.1, 0.1, 1.0);
+            smokeSystem.colorDead = new BABYLON.Color4(0, 0, 0, 0.0);
+        	
+        	smokeSystem.minSize = 0.3;
+            smokeSystem.maxSize = 1;
         
-            // Our built-in 'ground' shape. Params: name, width, depth, subdivs, scene
-            var ground = BABYLON.Mesh.CreateGround("ground1", 6, 6, 2, scene);
+            smokeSystem.minLifeTime = 0.3;
+            smokeSystem.maxLifeTime = 1.5;
+        
+            smokeSystem.emitRate = 350;
+        
+            // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
+            smokeSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+        
+            smokeSystem.gravity = new BABYLON.Vector3(0, 0, 0);
+        
+            smokeSystem.direction1 = new BABYLON.Vector3(-1.5, 8, -1.5);
+            smokeSystem.direction2 = new BABYLON.Vector3(1.5, 8, 1.5);
+        
+            smokeSystem.minAngularSpeed = 0;
+        	   smokeSystem.maxAngularSpeed = Math.PI;
+        
+            smokeSystem.minEmitPower = 0.5;
+            smokeSystem.maxEmitPower = 1.5;
+            smokeSystem.updateSpeed = 0.005;
+        
+            smokeSystem.start();
+        	
+        	
+        	
+            // Create a particle system
+            var fireSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
+        
+            //Texture of each particle
+            fireSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+        
+            // Where the particles come from
+            fireSystem.emitter = sphere; // the starting object, the emitter
+            fireSystem.minEmitBox = new BABYLON.Vector3(-0.5, 1, -0.5); // Starting all from
+            fireSystem.maxEmitBox = new BABYLON.Vector3(0.5, 1, 0.5); // To...
+        
+            // Colors of all particles
+            fireSystem.color1 = new BABYLON.Color4(1, 0.5, 0, 1.0);
+            fireSystem.color2 = new BABYLON.Color4(1, 0.5, 0, 1.0);
+            fireSystem.colorDead = new BABYLON.Color4(0, 0, 0, 0.0);
+        
+            // Size of each particle (random between...
+            fireSystem.minSize = 0.3;
+            fireSystem.maxSize = 1;
+        
+            // Life time of each particle (random between...
+            fireSystem.minLifeTime = 0.2;
+            fireSystem.maxLifeTime = 0.4;
+        
+            // Emission rate
+            fireSystem.emitRate = 600;
+        
+            // Blend mode : BLENDMODE_ONEONE, or BLENDMODE_STANDARD
+            fireSystem.blendMode = BABYLON.ParticleSystem.BLENDMODE_ONEONE;
+        
+            // Set the gravity of all particles
+            fireSystem.gravity = new BABYLON.Vector3(0, 0, 0);
+        
+            // Direction of each particle after it has been emitted
+            fireSystem.direction1 = new BABYLON.Vector3(0, 4, 0);
+            fireSystem.direction2 = new BABYLON.Vector3(0, 4, 0);
+        
+            // Angular speed, in radians
+            fireSystem.minAngularSpeed = 0;
+            fireSystem.maxAngularSpeed = Math.PI;
+        
+            // Speed
+            fireSystem.minEmitPower = 1;
+            fireSystem.maxEmitPower = 3;
+            fireSystem.updateSpeed = 0.007;
+        
+            // Start the particle system
+            fireSystem.start();
+            var ground = BABYLON.Mesh.CreateGround("ground1", 6, 16, 2, scene);
+            ground.position.z = 4;
+        	ground.material = knotMaterial;
+            //  here we goground.pos
+            scene.enablePhysics();
+        
+            sphere.physicsImpostor = new BABYLON.PhysicsImpostor(sphere, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 1, restitution: 0.9 }, scene);
+            ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, restitution: 0.9 }, scene);
+        
+            scene.onPointerDown = function(evt, pickResult){
+                // tilt-o-pad
+                if(pickResult.hit){
+                    if(pickResult.pickedPoint.z > sphere.position.z){
+                        ground.rotation.x -= 0.02
+                    }
+                    if(pickResult.pickedPoint.z < sphere.position.z){
+                        ground.rotation.x += 0.02
+                    }
+                    if(pickResult.pickedPoint.x < sphere.position.x){
+                        ground.rotation.z += 0.02
+                    }
+                     if(pickResult.pickedPoint.x > sphere.position.x){
+                        ground.rotation.z -= 0.02
+                    }
+                }
+            }
+            //stop fire
+            setInterval(function(){
+                if(sphere.intersectsMesh(ground)){
+                    fireSystem.stop()
+                    smokeSystem.stop()
+                }
+                else{
+                    fireSystem.start()
+                    smokeSystem.start()
+                }
+            })
+            //*88**
+        var life = 5
+            scene.registerBeforeRender(function(){
+                if(life === 3){
+                    //alert('try again!!')
+                    bar1.innerHTML = "Click To Try Again!!"
+                    setTimeout(function(){
+                        life = 5;
+                        bar1.innerHTML = 'Life left: '+life;
+                    },2000)
+                }
+                if (sphere.position.y < ground.position.y - 50){
+        life--;
+        bar1.innerHTML = 'Life left: '+life;
+                    // scene.getPhysicsEngine().setTimeStep(1 / 2000);
+                    // reset position
+                    sphere.position = new BABYLON.Vector3(0, 5, 0);
+                    // kill all positional movement
+                    sphere.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));       
+                    // kill all rotational movement
+                    sphere.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));       
+                    // kill the pad rotation with by 'newing' its .rotationQuaternion.  Goofy, but needed.
+                    ground.rotationQuaternion = new BABYLON.Quaternion();
+                }
+            });
         
             return scene;
         
@@ -95,57 +269,6 @@
         window.addEventListener("resize", function () {
             engine.resize();
         });
-
-
-        /*var canvas = document.getElementById("renderCanvas");
-        var engine = new BABYLON.Engine(canvas, true);
-engine.enableOfflineSupport = false;
-      
-        var scene = new BABYLON.Scene(engine);
-        
-            if (BABYLON.Engine.isSupported()) {
-                var canvas = document.getElementById("renderCanvas");
-                var engine = new BABYLON.Engine(canvas, true);
-        
-                BABYLON.SceneLoader.Load("https://gitcdn.xyz/repo/BabylonJS/Website/master/Scenes/Sponza/", "Sponza.babylon", engine, function (scene) {    // Wait for textures and shaders to be ready
-                    scene.executeWhenReady(function () {
-       var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
-   
-            // Move the sphere upward 1/2 its height
-            sphere.position.y = 1;
-            
-                    scene.activeCamera.attachControl(canvas);
-        
-                        // Once the scene is loaded, just register a render loop to render it
-        var sphere = BABYLON.Mesh.CreateSphere("sphere1", 16, 0.3, scene);
-        
-            // Move the sphere upward 1/2 its height
-            sphere.position.y = 1;
-        
-        scene.onPointerDown = function (evt, pickResult) {
-        console.log(pickResult);
-        						if(pickResult.hit){
-               //  if the click hits the ground object, we change the impact position
-                if (pickResult.pickedMesh.name = "sphere1") {
-                  sphere.dispose()
-                }
-                }
-            };
-        
-                        engine.runRenderLoop(function() {
-        sphere.position.z -= 0.002;
-                            scene.render();
-                        });
-                    });
-                }, function (progress) {
-                    // To do: give progress feedback to user
-                });
-        
-            }
-
-        engine.runRenderLoop(function () {
-            scene.render();
-        });*/
 
         
      </script>
