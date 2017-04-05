@@ -239,19 +239,7 @@
          
 });
                         //tracking online user
-        $('form').submit(function(){
-          socket.emit('chat message', $('#m').val());
-          $('#m').val('');
-          return false;
-        });
-              //           socket.on('state', function(stats){
-                     
-                //           })
-        socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg));
-               //document.cookie = 'ok';
-          alert(document.cookie);
-          window.scrollTo(0, document.body.scrollHeight);
+        
   //=================
         var life = 5
             scene.registerBeforeRender(function(){
@@ -287,6 +275,19 @@
                           alert(msg)
                           })
           ////sockettttt
+                        $('form').submit(function(){
+          socket.emit('chat message', $('#m').val());
+          $('#m').val('');
+          return false;
+        });
+              //           socket.on('state', function(stats){
+                     
+                //           })
+        socket.on('chat message', function(msg){
+          $('#messages').append($('<li>').text(msg));
+               //document.cookie = 'ok';
+         // alert(document.cookie);
+          window.scrollTo(0, document.body.scrollHeight);
                 });
       });
             return scene;
