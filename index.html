@@ -48,6 +48,10 @@
           socket.on('state', function(stats){
             online++;
              console.log(stats);
+                      if(online === 3){
+                          alert('oh yeah')
+                          }
+              
              //document.getElementById("myBtn").innerHTML = 'nice bruh';
             
              document.getElementById('show').innerHTML = online;
@@ -60,11 +64,8 @@
           $('#m').val('');
           return false;
         });
-                         socket.on('state', function(stats){
-                        if(online === 3){
-                          alert('oh yeah')
-                          }
-                           })
+              //           socket.on('state', function(stats){
+                //           })
         socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg));
                //document.cookie = 'ok';
