@@ -321,7 +321,7 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-                if (sphere.position.y < ground.position.y - 50){
+               if (sphere.position.y < ground.position.y - 50 && sphere.position.z > ground.position.z + 10){
         life--;
         bar1.innerHTML = 'Life left: '+life;
                     // scene.getPhysicsEngine().setTimeStep(1 / 2000);
@@ -357,7 +357,7 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-                if (sphere.position.y < ground.position.y - 50){
+                if (sphere.position.y < ground.position.y - 50 && sphere.position.z < ground.position.z - 10){
         life--;
         bar1.innerHTML = 'Life left: '+life;
                     // scene.getPhysicsEngine().setTimeStep(1 / 2000);
