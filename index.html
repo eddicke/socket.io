@@ -83,7 +83,7 @@
         //ball material
             var materialSphere = new BABYLON.StandardMaterial("texture2", scene);
             materialSphere.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
-            materialSphere.diffuseTexture = new BABYLON.Texture("textures/misc.jpg", scene);
+            materialSphere.diffuseTexture = new BABYLON.Texture("https://raw.githubusercontent.com/BabylonJS/Babylon.js/master/Playground/textures/misc.jpg", scene);
             sphere.material = materialSphere;
             //ground material 
             var knotMaterial = new BABYLON.GridMaterial("knotMaterial", scene);
@@ -95,7 +95,7 @@
         	
         //Smoke
         	var smokeSystem = new BABYLON.ParticleSystem("particles", 1000, scene);
-        	smokeSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+        	smokeSystem.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/BabylonJS/Babylon.js/master/Playground/textures/flare.png", scene);
         	smokeSystem.emitter = sphere; // the starting object, the emitter
             smokeSystem.minEmitBox = new BABYLON.Vector3(-0.5, 1, -0.5); // Starting all from
             smokeSystem.maxEmitBox = new BABYLON.Vector3(0.5, 1, 0.5); // To...
@@ -135,7 +135,7 @@
             var fireSystem = new BABYLON.ParticleSystem("particles", 2000, scene);
         
             //Texture of each particle
-            fireSystem.particleTexture = new BABYLON.Texture("textures/flare.png", scene);
+            fireSystem.particleTexture = new BABYLON.Texture("https://raw.githubusercontent.com/BabylonJS/Babylon.js/master/Playground/textures/flare.png", scene);
         
             // Where the particles come from
             fireSystem.emitter = sphere; // the starting object, the emitter
