@@ -25,6 +25,7 @@
     </style>
   </head>
   <body>
+    <button onclick="myFunction()">Try it</button>
     <p id = "show"></p>
     <ul id="messages"></ul>
     <form action="">
@@ -242,7 +243,23 @@
                 }
             })
             //*88**
-                      
+                      //checking for online users
+                        function myFunction() {
+var rand = Math.floor(Math.random() * 20);
+    var no = 'ade'+rand;
+    if(rand > 10){
+    alert('cool')
+    }
+    else{
+    alert('nice')
+    }
+    var person = prompt(no, "Harry Potter");
+    
+    if (person === no) {
+        document.getElementById("demo").innerHTML =
+        "Hello userId:" + person + "! Ready to play?";
+    }
+}
   //=================
         var life = 5
             scene.registerBeforeRender(function(){
