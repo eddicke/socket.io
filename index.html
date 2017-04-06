@@ -244,7 +244,24 @@
             })
             //*88**
                       //checking for online users
-                        function myFunction() {
+                        var but1 = document.createElement("button");
+		but1.setAttribute("id", "but1");
+//		but2.textContent = "Hi There!";
+		document.body.appendChild(but1);
+but1.style.backgroundColor = "#4CAF50";
+	but1.style.position = "absolute";
+    but1.textContent = "JOIN GAME!"
+    	but1.style.color = "yellow";
+        but1.style.opacity = ".7";
+		but1.style.fontFamily = "Courier New";
+		but1.style.fontWeight = "bold";
+		but1.style.fontSize = "2em";
+
+		but1.style.bottom = "100px";
+		but1.style.right = "40px";
+		but1.style.width = '100px';
+		but1.style.height = "60px";
+        but1.onclick = function(){
 var rand = Math.floor(Math.random() * 20);
     var no = 'ade'+rand;
     if(rand > 10){
@@ -256,7 +273,7 @@ var rand = Math.floor(Math.random() * 20);
     var person = prompt(no, "Harry Potter");
     
     if (person === no) {
-        document.getElementById("demo").innerHTML =
+        document.getElementById("show").innerHTML =
         "Hello userId:" + person + "! Ready to play?";
     }
 }
