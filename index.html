@@ -310,6 +310,8 @@ var rand = Math.floor(Math.random() * 20);
 	    }
 			      //player2
 			       function player2(){
+				       bar1.style.left = "40px";
+			 bar1.style.border = "5px solid blue";
 		    scene.registerBeforeRender(function(){
               //broadcast-
                  if(life === 3){
@@ -318,8 +320,7 @@ var rand = Math.floor(Math.random() * 20);
               ///////
                 if(life === 3){
                     //alert('try again!!')
-			bar1.style.left = "40px";
-			 bar1.style.border = "5px solid blue";
+			
 			bar1.style
                     bar1.innerHTML = "Click To Try Again!!"
                     setTimeout(function(){
