@@ -198,15 +198,15 @@
           socket.on('state', function(stats){
             online++;
              console.log(stats);
-                      if(online === 3){
-                          alert('oh yeah')
-                          }
+                     
              
              //document.getElementById("myBtn").innerHTML = 'nice bruh';
             
              document.getElementById('show').innerHTML = online;
           })
-         
+          if(online === 2){
+                          alert('oh yeah')
+                          }
 });
                         //tracking online user
      
