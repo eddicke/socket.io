@@ -257,7 +257,7 @@ but1.style.backgroundColor = "#4CAF50";
 		but1.style.fontSize = "2em";
 
 		but1.style.bottom = "100px";
-		but1.style.right = "40px";
+		but1.style.right = "100px";
 		but1.style.width = '100px';
 		but1.style.height = "60px";
         but1.onclick = function(){
@@ -345,7 +345,7 @@ var rand = Math.floor(Math.random() * 20);
 	    }
           ////Socket-events
      socket.on('hunts', function(msg){
-                          alert(msg)
+                          //alert(msg)
                           })
           socket.on('power', function(hunts){
                            if(hunts > sphere.position.z){
