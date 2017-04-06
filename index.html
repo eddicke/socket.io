@@ -266,6 +266,9 @@ var rand = Math.floor(Math.random() * 20);
     if(rand > 10){
     player1();
     }
+		else{
+			player2()
+		}
     var person = prompt(no, "Harry Potter");
     
     if (person === no) {
@@ -315,6 +318,9 @@ var rand = Math.floor(Math.random() * 20);
               ///////
                 if(life === 3){
                     //alert('try again!!')
+			bar1.style.left = "40px";
+			 bar1.style.border = "5px solid blue";
+			bar1.style
                     bar1.innerHTML = "Click To Try Again!!"
                     setTimeout(function(){
                         life = 5;
