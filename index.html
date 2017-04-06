@@ -321,7 +321,7 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-			    if (sphere.position.y < ground.position.y){
+			   /* if (sphere.position.y < ground.position.y){
 			     // reset position
                     sphere.position = new BABYLON.Vector3(0, 5, 0);
                     // kill all positional movement
@@ -330,8 +330,8 @@ var rand = Math.floor(Math.random() * 20);
                     sphere.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));       
                     // kill the pad rotation with by 'newing' its .rotationQuaternion.  Goofy, but needed.
                     ground.rotationQuaternion = new BABYLON.Quaternion();
-			    }
-               if (sphere.position.y < ground.position.y - 50 && sphere.position.z > ground.position.z + 10){
+			    }*/
+               if (sphere.position.y < ground.position.y){
         life--;
         bar1.innerHTML = 'Life left: '+life;
                     // scene.getPhysicsEngine().setTimeStep(1 / 2000);
@@ -367,7 +367,7 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-			      if (sphere.position.y < ground.position.y){
+			      /*if (sphere.position.y < ground.position.y){
 			     // reset position
                     sphere.position = new BABYLON.Vector3(0, 5, 0);
                     // kill all positional movement
@@ -376,8 +376,8 @@ var rand = Math.floor(Math.random() * 20);
                     sphere.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));       
                     // kill the pad rotation with by 'newing' its .rotationQuaternion.  Goofy, but needed.
                     ground.rotationQuaternion = new BABYLON.Quaternion();
-			    }
-                if (sphere.position.y < ground.position.y - 50 && sphere.position.z < ground.position.z - 10){
+			    }*/
+                if (sphere.position.y < ground.position.y){
         life--;
         bar1.innerHTML = 'Life left: '+life;
                     // scene.getPhysicsEngine().setTimeStep(1 / 2000);
