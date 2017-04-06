@@ -80,6 +80,7 @@
                 bar1.style.textAlign = 'center'
                 bar1.style.verticalAlign = 'middle'
                 bar1.style.padding = '5px'
+		bar1.style.display = 'none';
         //ball material
             var materialSphere = new BABYLON.StandardMaterial("texture2", scene);
             materialSphere.diffuseColor = new BABYLON.Color3(1, 0, 0); //Red
@@ -279,6 +280,7 @@ var rand = Math.floor(Math.random() * 20);
   //=================
         var life = 5
             function player1(){
+		    bar1.style.display = 'block';
 		    scene.registerBeforeRender(function(){
               //broadcast-
                  if(life === 3){
@@ -310,6 +312,7 @@ var rand = Math.floor(Math.random() * 20);
 	    }
 			      //player2
 			       function player2(){
+				       bar1.style.display = 'block';
 				       bar1.style.left = "40px";
 			 bar1.style.border = "5px solid blue";
 		    scene.registerBeforeRender(function(){
