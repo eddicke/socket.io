@@ -27,6 +27,7 @@
   <body>
     <p id = "show"></p>
     <ul id="messages"></ul>
+	 <div id = "div"></div>
     <form action="">
       <input id="m" autocomplete="off" /><button>Send</button>
     </form>
@@ -73,8 +74,8 @@
         ss.rel = "stylesheet";
         ss.href = "//fonts.googleapis.com/css?family=Butcherman";
         document.body.appendChild(ss);
-            var bar1 = document.createElement("div");
-        		bar1.setAttribute("id", "bar1");
+            var bar1 = document.getElementById("div");
+        		//bar1.setAttribute("id", "bar1");
         		bar1.textContent = "Life: 5";
         		document.body.appendChild(bar1);
                // bar1.style.backgroundColor = "#4CAF50";
