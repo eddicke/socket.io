@@ -25,7 +25,6 @@
     </style>
   </head>
   <body>
-    <button onclick="myFunction()">Try it</button>
     <p id = "show"></p>
     <ul id="messages"></ul>
     <form action="">
@@ -33,7 +32,7 @@
     </form>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-      //bjs
+      
       <div id="canvasZone">
         <canvas id="renderCanvas"></canvas>
     </div>
@@ -265,10 +264,7 @@ but1.style.backgroundColor = "#4CAF50";
 var rand = Math.floor(Math.random() * 20);
     var no = 'ade'+rand;
     if(rand > 10){
-    alert('cool')
-    }
-    else{
-    alert('nice')
+    player1();
     }
     var person = prompt(no, "Harry Potter");
     
@@ -279,7 +275,8 @@ var rand = Math.floor(Math.random() * 20);
 }
   //=================
         var life = 5
-            scene.registerBeforeRender(function(){
+            function player1(){
+		    scene.registerBeforeRender(function(){
               //broadcast-
                  if(life === 3){
            socket.emit('hunts', life);
@@ -307,6 +304,7 @@ var rand = Math.floor(Math.random() * 20);
                     ground.rotationQuaternion = new BABYLON.Quaternion();
                 }
             });
+	    }
           ////Socket-events
      socket.on('hunts', function(msg){
                           alert(msg)
