@@ -321,14 +321,14 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-			    //scores
-			   if(sphere.position.y < ground.position.y - 50 && sphere.position.z < ground.position.z){
+			 
+               if (sphere.position.y < ground.position.y){
+                    //scores
+			   if(sphere.position.z < ground.position.z){
 			   life--;
         bar1.innerHTML = 'Life left: '+life;
                    
 			    }
-               if (sphere.position.y < ground.position.y){
-                 
                     // reset position
                     sphere.position = new BABYLON.Vector3(0, 5, 0);
                     // kill all positional movement
@@ -361,15 +361,16 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-			     //scores
-			   if(sphere.position.y < ground.position.y - 50 && sphere.position.z < ground.position.z){
+			   
+			    
+                if (sphere.position.y < ground.position.y){
+                     //scores
+			   if(sphere.position.z > ground.position.z){
 			   life--;
         bar1.innerHTML = 'Life left: '+life;
                    
 			    }
-			    
-                if (sphere.position.y < ground.position.y){
-                    // reset position
+			// reset position
                     sphere.position = new BABYLON.Vector3(0, 5, 0);
                     // kill all positional movement
                     sphere.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));       
