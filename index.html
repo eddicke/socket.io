@@ -5,7 +5,7 @@
          <script src="https://gitcdn.xyz/repo/eddicke/new/master/Babylon.js"></script>
 <script src = "https://gitcdn.xyz/repo/BabylonJS/Website/master/Oimo.js"></script>
 <script src ="https://gitcdn.xyz/repo/BabylonJS/Website/master/cannon.js"></script>
-    <script src = "https://gitcdn.xyz/repo/BabylonJS/Babylon.js/master/dist/preview%20release/materialsLibrary/babylon.gridMaterial.js"></script>
+    <script src = "https://babylonjs.azurewebsites.net/lib/babylon.gridMaterial.min.js"></script>
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       body { font: 13px Helvetica, Arial; }
@@ -361,15 +361,15 @@ var rand = Math.floor(Math.random() * 20);
                         bar1.innerHTML = 'Life left: '+life;
                     },2000)
                 }
-			   
-			    
-                if (sphere.position.y < ground.position.y){
-                     //scores
+			   //scores
 			   if(sphere.position.z > ground.position.z){
 			   life--;
         bar1.innerHTML = 'Life left: '+life;
                    
 			    }
+			    
+                if (sphere.position.y < ground.position.y){
+                     
 			// reset position
                     sphere.position = new BABYLON.Vector3(0, 5, 0);
                     // kill all positional movement
