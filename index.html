@@ -307,6 +307,7 @@ var rand = Math.floor(Math.random() * 20);
         var life = 5
             function player1(){
 		    bar1.style.display = 'block';
+		       }
 		    scene.registerBeforeRender(function(){
               //broadcast-
                  if(life === 3){
@@ -339,48 +340,14 @@ var rand = Math.floor(Math.random() * 20);
                     ground.rotationQuaternion = new BABYLON.Quaternion();
                 }
             });
-	    }
+	 
 			      //player2
 			       function player2(){
 				       bar1.style.display = 'block';
 				       bar1.style.left = "40px";
 			 bar1.style.border = "5px solid blue";
-		    scene.registerBeforeRender(function(){
-              //broadcast-
-                 if(life === 3){
-           socket.emit('hunts', life);
-          }
-              ///////
-                if(life === 3){
-                    //alert('try again!!')
-			
-			bar1.style
-                    bar1.innerHTML = "Click To Try Again!!"
-                    setTimeout(function(){
-                        life = 5;
-                        bar1.innerHTML = 'Life left: '+life;
-                    },2000)
-                }
-			   //scores
-			 /*if(sphere.position.z < ground.position.z){
-			   life--;
-        bar1.innerHTML = 'Life left: '+life;
-                   
-			    }*/
-			    
-                if (sphere.position.y < ground.position.y){
-                     
-			// reset position
-                    sphere.position = new BABYLON.Vector3(0, 5, 0);
-                    // kill all positional movement
-                    sphere.physicsImpostor.setLinearVelocity(new BABYLON.Vector3(0,0,0));       
-                    // kill all rotational movement
-                    sphere.physicsImpostor.setAngularVelocity(new BABYLON.Vector3(0,0,0));       
-                    // kill the pad rotation with by 'newing' its .rotationQuaternion.  Goofy, but needed.
-                    ground.rotationQuaternion = new BABYLON.Quaternion();
-                }
-            });
-	    }
+				        }
+		   
           ////Socket-events
      socket.on('hunts', function(msg){
                           //alert(msg)
